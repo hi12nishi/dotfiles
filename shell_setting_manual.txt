@@ -1,0 +1,65 @@
+zsh+prezto インストールメモ
+
+# brew updateでパッケージ情報をアップデート
+brew update
+# upgradeでbrew自体をアップデート
+breu upgrade
+
+# zshのインストール
+brew install zsh
+
+# /etc/shells にbrewでインストールしたzshを記述する
+sudo vi /etc/shells
+最後の行に /usr/local/bin/zsh を追加
+保存して終了
+
+# デフォルトログインシェルをzshに変更
+chsh -s /usr/local/bin/zsh
+
+# もし.zshrcのような設定ファイルをすでに編集していた場合，
+# 適当なディレクトリに避難させておく
+mkdir zsh_old && mv .zlogin .zlogout .zprofile .zshenv .zshrc zsh_old
+
+# preztoのインストール
+githubのURL
+https://github.com/sorin-ionescu/prezto
+
+1. Clone the repository:
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+2. Create a new zsh configration by copying the zsh configration files provided:
+   => Preztoの各設定ファイルのシンボリックリンクをホームディレクトリに作成
+
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+# ターミナルを再起動してリンクが正しく張れているか確認
+ls -al
+(e.g.,)
+.zshrc -> /Users/yota-ni/.zprezto/runcoms/zshrc
+
+## オプショナル
+# powerline patched font を入れる
+monaco for powerline
+ https://gist.github.com/baopham/1838072
+source code pro for powerline
+ https://github.com/powerline/fonts
+
+.otfファイルをダウンロードし，Font Book.app でインストール
+
+# テーマの変更
+vi .zpreztorc
+ zstyle ':prezto:module:prompt' theme 'skwp'
+保存して再起動
+
+
+# 2019年 6月13日 追記
+dockerコマンドの補完のため，.zprezto/modules/completion/external/src/ 以下にシンボリックリンクを貼った．
+
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion .zprezto/modules/completion/external/src/_docker
+
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.zsh-completion .zprezto/modules/completion/external/src/_docker-machine
+
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion .zprezto/modules/completion/external/src/_docker-compose
