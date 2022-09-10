@@ -19,22 +19,22 @@ bindkey "^N" history-beginning-search-forward-end
 
 ### PATH
 # Add Visual Studio Code (code)
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+#export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 # Add Go-lang
-export GOPATH="/Users/yota-ni/go"
-export PATH="$GOPATH/bin:$PATH"
+#export GOPATH="/Users/yota-ni/go"
+#export PATH="$GOPATH/bin:$PATH"
 # Add pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
 # Add Understand.app
-export STIHOME="/Applications/Understand.app"
-export PATH="$STIHOME/Contents/MacOS:$PATH"
-export PYTHONPATH="$STIHOME/Contents/MacOS/Python:$PYTHONPATH"
+#export STIHOME="/Applications/Understand.app"
+#export PATH="$STIHOME/Contents/MacOS:$PATH"
+#export PYTHONPATH="$STIHOME/Contents/MacOS/Python:$PYTHONPATH"
 # Add Rust and Cargo
-export PATH="$HOME/.cargo/bin:$PATH"
+#export PATH="$HOME/.cargo/bin:$PATH"
 # Add Cobra
-export COBRA="/Users/yota-ni/src/github/Cobra"
-export PATH="$PATH:$COBRA/bin_mac"
+#export COBRA="/Users/yota-ni/src/github/Cobra"
+#export PATH="$PATH:$COBRA/bin_mac"
 
 # どこかから入手してビルド・インストールするソフトの
 # インストール先を$HOME/usr としておく
@@ -43,10 +43,10 @@ export PATH="$PATH:$HOME/usr/bin"
 export MANPATH="$(manpath):$HOME/usr/man"
 
 # opensslの1.1を参照するようにする
-BREW_PREFIX="/usr/local/opt"
-export LDFLAGS="-L$BREW_PREFIX/openssl@1.1/lib"
-export CFLAGS="-I$BREW_PREFIX/openssl@1.1/include"
-export CPPFLAGS="-I$BREW_PREFIX/openssl@1.1/include"
+#BREW_PREFIX="/usr/local/opt"
+#export LDFLAGS="-L$BREW_PREFIX/openssl@1.1/lib"
+#export CFLAGS="-I$BREW_PREFIX/openssl@1.1/include"
+#export CPPFLAGS="-I$BREW_PREFIX/openssl@1.1/include"
 
 ### General Settings
 setopt no_beep  # ビープ音を鳴らさない
@@ -74,11 +74,21 @@ function cd() {
   builtin cd $@ && ls;
 }
 
+## CppUTest
+#export CPPUTEST_HOME=/home/nishi/src/github/cpputest-latest
+
+## asdf
+# asdf 起動
+#. $HOME/.asdf/asdf.sh
+# asdf 補完
+#fpath=(${ASDF_DIR}/completions $fpath)
+#autoload -Uz compinit && compinit
+
 # pyenvのshimsと自動補完を有効化する設定
 # PATH設定の下に記述する必要がある
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+#if command -v pyenv 1>/dev/null 2>&1; then
+#  eval "$(pyenv init -)"
+#fi
 
 # pyenv-virtualenvの設定
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"

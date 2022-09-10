@@ -1,0 +1,39 @@
+# はじめに
+自分でソフトウェアのソースコードを入手してきて，
+ビルド・インストールするときに /usr や /usr/local へインストールしないようにするためのディレクトリ．
+この $HOME/usr 以下に適宜インストールする．
+
+実行ファイル  : $HOME/usr/bin
+ヘッダファイル: $HOME/usr/include
+共有ライブラリ: $HOME/usr/lib
+manファイル   : $HOME/usr/man
+
+参考:
+https://qiita.com/kuchida1981/items/d028940ade41096490de
+
+# 準備
+$HOME/usr/bin を PATH に追加する．
+例:
+export PATH="$PATH:$HOME/usr/bin"
+
+$HOME/usr/man を MANPATH に追加する．
+例:
+export MANPATH="$(manpath):$HOME/usr/man"
+
+# ビルド方法
+configureスクリプトが用意されているソフトをビルドするとき，
+./configure --prefix=$HOME/usr
+とする．
+
+Makefileしかないソフトの場合，
+Makefileの中身を読み，PREFIXを適宜修正する．
+例: makefileに以下のような記載があったといき，
+-----
+PREFIX=/usr/local
+BINDIR=$(PREFIX)/bin
+MANDIR=$(PREFIX)/man
+PYTHON=/usr/bin/env python
+  :
+-----
+この場合は，
+PREFIX=/usr/local を PREFIX=$(HOME)/usr に置き換える．
